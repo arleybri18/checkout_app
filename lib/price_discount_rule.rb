@@ -21,6 +21,8 @@ class PriceDiscountRule < PricingRule
   # * +min_quantity+ - minimal quantity of the product that needs to be in the checkout to apply discount
   # * +new_price+ - new price of the product if apply the discount
   def calculate_total(quantity)
+    raise options_error and return unless options[:min_quantity] && options[:new_price]
+
     if quantity >= options[:min_quantity]
       options[:new_price] * quantity
     else

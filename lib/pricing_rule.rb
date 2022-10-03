@@ -23,4 +23,10 @@ class PricingRule
   def calculate_total(quantity)
     raise NotImplementedError, "Cannot calculate total, please implement the logic"
   end
+
+  private
+  
+  def options_error
+    raise ArgumentError, "The options for calculating the total is not present, please update the rule"
+  end
 end

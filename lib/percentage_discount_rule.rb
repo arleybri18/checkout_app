@@ -21,6 +21,8 @@ class PercentageDiscountRule < PricingRule
   # * +min_quantity+ - minimal quantity of the product that needs to be in the checkout to apply discount
   # * +percentage+ - is a decimal value (i.e. 0.5) that needs to calculate the new price of the product
   def calculate_total(quantity)
+    raise options_error and return unless options[:min_quantity] && options[:percentage]
+
     if quantity >= options[:min_quantity]
       new_price = options[:percentage] * product.price
       (new_price * quantity).round(2)
